@@ -1,6 +1,6 @@
 package com.slotvinskiy.editor;
 
-import com.slotvinskiy.editor.shapes.Arc1;
+import com.slotvinskiy.editor.shapes.Arc;
 import com.slotvinskiy.editor.shapes.Circle;
 import com.slotvinskiy.editor.shapes.Shape;
 import com.slotvinskiy.editor.shapes.Square;
@@ -77,7 +77,12 @@ public class Board {
 
     public void switchCurrentMovingShapeToArc1() {
         turnMovingShapesIntoStatical();
-        movingShapes.add(new Arc1(this, displayDriver, START_X, START_Y, true));
+        movingShapes.add(new Arc(this, displayDriver, START_X, START_Y, 360, true));
+    }
+
+    public void switchCurrentMovingShapeToArc2() {
+        turnMovingShapesIntoStatical();
+        movingShapes.add(new Arc(this, displayDriver, START_X, START_Y, 180, true));
     }
 
     private void turnMovingShapesIntoStatical() {

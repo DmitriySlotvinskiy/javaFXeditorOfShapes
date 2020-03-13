@@ -73,6 +73,10 @@ public class Main extends Application {
                 break;
             case DIGIT3:
                 board.switchCurrentMovingShapeToArc1();
+                break;
+            case DIGIT4:
+                board.switchCurrentMovingShapeToArc2();
+                break;
         }
         drawFrame();
     }
