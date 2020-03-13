@@ -55,6 +55,7 @@ public class Board {
     public List<Shape> getMovingShapes() {
         return movingShapes;
     }
+
     public List<Shape> getStaticalShapes() {
         return staticalShapes;
     }

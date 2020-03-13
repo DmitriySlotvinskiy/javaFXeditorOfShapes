@@ -6,7 +6,7 @@ import com.slotvinskiy.editor.MyColor;
 
 import java.util.Random;
 
-public abstract class BaseShape implements Shape{
+public abstract class BaseShape implements Shape {
 
     protected double x;
     protected double y;
