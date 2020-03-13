@@ -6,14 +6,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.ArcType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
 
     private static final int BOARD_WIDTH = 800;
-    private static final int BOARD_HEIGHT = 500;
+    private static final int BOARD_HEIGHT = 600;
     private static final int FPS = 60;
 
     private boolean closed;
@@ -69,6 +71,8 @@ public class Main extends Application {
             case DIGIT2:
                 board.switchCurrentMovingShapeToSquare();
                 break;
+            case DIGIT3:
+                board.switchCurrentMovingShapeToArc1();
         }
         drawFrame();
     }
@@ -77,6 +81,5 @@ public class Main extends Application {
     public void drawFrame() {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
         board.drawFrame();
-        gc.fillOval(100, 100, 10, 10);
     }
 }

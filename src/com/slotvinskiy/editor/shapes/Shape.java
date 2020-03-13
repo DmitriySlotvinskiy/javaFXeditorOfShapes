@@ -12,4 +12,6 @@ public interface Shape {
     double getX();
 
     double getY();
+
+    void setSelection(boolean b);
 }

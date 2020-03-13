@@ -14,6 +14,7 @@ public abstract class BaseShape implements Shape {
     protected Board board;
     protected DisplayDriver displayDriver;
     protected MyColor color;
+    protected boolean selected = false;
 
     public BaseShape(Board board, DisplayDriver displayDriver, double x, double y) {
         this.board = board;
@@ -25,24 +26,29 @@ public abstract class BaseShape implements Shape {
         color = MyColor.values()[random.nextInt(colorsNum)];
     }
 
+    public BaseShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
+        this(board, displayDriver,  x,  y);
+        this.selected = selected;
+    }
+
     @Override
     public void moveUp() {
-        y--;
+        y -= 5;
     }
 
     @Override
     public void moveDown() {
-        y++;
+        y += 5;
     }
 
     @Override
     public void moveRight() {
-        x++;
+        x += 5;
     }
 
     @Override
     public void moveLeft() {
-        x--;
+        x -= 5;
     }
 
     @Override
@@ -53,5 +59,10 @@ public abstract class BaseShape implements Shape {
     @Override
     public double getY() {
         return y;
+    }
+
+    @Override
+    public void setSelection(boolean bool) {
+        selected = bool;
     }
 }
