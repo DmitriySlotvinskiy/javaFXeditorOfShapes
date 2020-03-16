@@ -52,6 +52,12 @@ public abstract class BaseShape implements Shape {
     }
 
     @Override
+    public void moveWithMouse(double offSetX, double offSetY) {
+        x += -offSetX;
+        y += -offSetY;
+    }
+
+    @Override
     public double getX() {
         return x;
     }

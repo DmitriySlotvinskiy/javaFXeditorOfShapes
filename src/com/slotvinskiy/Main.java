@@ -6,8 +6,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.ArcType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -42,7 +42,30 @@ public class Main extends Application {
         board = new Board(displayDriver);
 
         scene.setOnKeyPressed(this::handleKeyPressed);
+        scene.setOnMousePressed(this::mouseClick);
+        scene.setOnMouseDragged(this::mouseDrag);
+        scene.setOnMouseReleased(this::mouseRelease);
         drawFrame();
+    }
+
+    private void mouseDrag(MouseEvent mouseEvent) {
+        double offSetX = board.getX() - mouseEvent.getX();
+        double offSetY = board.getY() - mouseEvent.getY();
+        board.moveWithMouse(offSetX, offSetY);
+        drawFrame();
+        board.setX(mouseEvent.getX());
+        board.setY(mouseEvent.getY());
+    }
+
+    private void mouseClick(MouseEvent mouseEvent) {
+        board.setX(mouseEvent.getX());
+        board.setY(mouseEvent.getY());
+        drawFrame();
+    }
+
+    private void mouseRelease(MouseEvent mouseEvent) {
+        board.setX(0);
+        board.setY(0);
     }
 
 
@@ -53,6 +76,7 @@ public class Main extends Application {
 
     private void handleKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
+
             case UP:
                 board.moveUp();
                 break;
@@ -64,6 +88,9 @@ public class Main extends Application {
                 break;
             case RIGHT:
                 board.moveRight();
+                break;
+            case ENTER:
+                board.turnMovingShapesIntoStatical();
                 break;
             case DIGIT1:
                 board.switchCurrentMovingShapeToCircle();

@@ -8,6 +8,7 @@ public interface Shape {
     void moveDown();
     void moveRight();
     void moveLeft();
+    void moveWithMouse(double offSetX, double offSetY);
 
     double getX();
 

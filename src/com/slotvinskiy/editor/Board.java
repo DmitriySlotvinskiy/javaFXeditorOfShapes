@@ -1,9 +1,9 @@
 package com.slotvinskiy.editor;
 
 import com.slotvinskiy.editor.shapes.Arc;
-import com.slotvinskiy.editor.shapes.Circle;
+import com.slotvinskiy.editor.shapes.CircleShape;
 import com.slotvinskiy.editor.shapes.Shape;
-import com.slotvinskiy.editor.shapes.Square;
+import com.slotvinskiy.editor.shapes.SquareShape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,25 @@ public class Board {
 
     private final int START_X = 400;
     private final int START_Y = 300;
+    private double x;
+    private double y;
 
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
 
     private final DisplayDriver displayDriver;
     private final List<Shape> movingShapes = new ArrayList<>();
@@ -20,7 +38,7 @@ public class Board {
 
     public Board(DisplayDriver displayDriver) {
         this.displayDriver = displayDriver;
-        movingShapes.add(new Circle(this, displayDriver, START_X, START_Y, true));
+        movingShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void drawFrame() {
@@ -57,6 +75,12 @@ public class Board {
         }
     }
 
+    public void moveWithMouse(double offSetX, double offSetY) {
+        for (Shape shape : movingShapes) {
+            shape.moveWithMouse(offSetX, offSetY);
+        }
+    }
+
     public List<Shape> getMovingShapes() {
         return movingShapes;
     }
@@ -67,12 +91,12 @@ public class Board {
 
     public void switchCurrentMovingShapeToCircle() {
         turnMovingShapesIntoStatical();
-        movingShapes.add(new Circle(this, displayDriver, START_X, START_Y, true));
+        movingShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void switchCurrentMovingShapeToSquare() {
         turnMovingShapesIntoStatical();
-        movingShapes.add(new Square(this, displayDriver, START_X, START_Y, true));
+        movingShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void switchCurrentMovingShapeToArc1() {
@@ -85,7 +109,7 @@ public class Board {
         movingShapes.add(new Arc(this, displayDriver, START_X, START_Y, 180, true));
     }
 
-    private void turnMovingShapesIntoStatical() {
+    public void turnMovingShapesIntoStatical() {
         if (movingShapes.size() != 0) {
             for (Shape shape : movingShapes) {
                 shape.setSelection(false);
