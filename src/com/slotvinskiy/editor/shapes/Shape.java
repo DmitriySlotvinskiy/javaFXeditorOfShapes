@@ -12,10 +12,13 @@ public interface Shape {
 
     void decreaseSize();
     void increaseSize();
+    boolean isHit(int x, int y);
 
     double getX();
 
     double getY();
 
     void setSelection(boolean b);
+    void setAsSelected();
+    void setAsDeselected();
 }

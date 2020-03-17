@@ -12,8 +12,8 @@ public class Board {
 
     private final int START_X = 400;
     private final int START_Y = 300;
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
 
     public double getX() {
@@ -21,7 +21,7 @@ public class Board {
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.x = (int) x;
     }
 
     public double getY() {
@@ -29,7 +29,7 @@ public class Board {
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.y = (int) y;
     }
 
     private final DisplayDriver displayDriver;
@@ -129,5 +129,21 @@ public class Board {
             staticalShapes.addAll(movingShapes);
             movingShapes.clear();
         }
+    }
+
+    public void isHit() {
+        for (Shape shape : staticalShapes) {
+            if (shape.isHit(x, y)) {
+                turnMovingShapesIntoStatical();
+                addToMoving(shape);
+                break;
+            }
+        }
+    }
+
+    private void addToMoving(Shape shape) {
+        staticalShapes.remove(shape);
+        movingShapes.add(shape);
+        shape.setAsSelected();
     }
 }

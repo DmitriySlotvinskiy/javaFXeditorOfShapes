@@ -8,6 +8,8 @@ import javafx.scene.shape.ArcType;
 
 public class DisplayDriverImpl implements DisplayDriver {
 
+    public static final int WIDTH_FOR_SELECTED = 10;
+    private static final int WIDTH_FOR_DESELECTED = 3;
     private final GraphicsContext gc;
 
     public DisplayDriverImpl(GraphicsContext gc) {
@@ -64,9 +66,15 @@ public class DisplayDriverImpl implements DisplayDriver {
     }
 
     @Override
-    public void setLineWidth(int x) {
-        gc.setLineWidth(x);
+    public void setLineWidthAsSelected() {
+        gc.setLineWidth(WIDTH_FOR_SELECTED);
     }
+
+    @Override
+    public void setLineWidthAsDeselected() {
+        gc.setLineWidth(WIDTH_FOR_DESELECTED);
+    }
+
 
 
 }

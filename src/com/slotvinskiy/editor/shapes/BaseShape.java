@@ -81,4 +81,15 @@ public abstract class BaseShape implements Shape {
     public void setSelection(boolean bool) {
         selected = bool;
     }
+
+    public void setAsSelected() {
+        displayDriver.setLineWidthAsSelected();
+        setSelection(true);
+    }
+
+    public void setAsDeselected() {
+        displayDriver.setLineWidthAsDeselected();
+        setSelection(false);
+
+    }
 }

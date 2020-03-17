@@ -17,12 +17,20 @@ public class SquareShape extends BaseShape {
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            displayDriver.setLineWidth(10);
+            setAsSelected();
             displayDriver.drawSelectedSquare(x, y, size);
-            displayDriver.setLineWidth(3);
         } else {
             displayDriver.drawSquare(x, y, size);
         }
     }
 
+
+    @Override
+    public boolean isHit(int x, int y) {
+        if (x >= this.x && x <= (this.x + size) && y >= this.y && y <= (this.y + size)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

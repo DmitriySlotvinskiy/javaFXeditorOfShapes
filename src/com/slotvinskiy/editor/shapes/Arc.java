@@ -21,11 +21,15 @@ public class Arc extends BaseShape{
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            displayDriver.setLineWidth(10);
+            displayDriver.setLineWidthAsSelected();
             displayDriver.drawSelectedArc1(x, y, size, size, startAngle, ARC_EXTENT);
-            displayDriver.setLineWidth(3);
         } else {
             displayDriver.drawArc1(x, y, size, size, startAngle, ARC_EXTENT);
         }
+    }
+
+    @Override
+    public boolean isHit(int x, int y) {
+        return false;
     }
 }

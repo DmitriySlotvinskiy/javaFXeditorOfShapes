@@ -20,5 +20,7 @@ public interface DisplayDriver {
 
     public void drawSelectedArc1(double x, double y, double w, double h, double startAngle, double arcExtent);
 
-    void setLineWidth(int x);
+    void setLineWidthAsSelected();
+
+    void setLineWidthAsDeselected();
 }

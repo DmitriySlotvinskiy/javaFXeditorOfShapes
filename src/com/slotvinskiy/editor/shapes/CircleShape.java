@@ -17,11 +17,16 @@ public class CircleShape extends BaseShape {
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            displayDriver.setLineWidth(10);
+            displayDriver.setLineWidthAsSelected();
             displayDriver.drawSelectedCircle(x, y, size);
-            displayDriver.setLineWidth(3);
         } else {
             displayDriver.drawCircle(x, y, size);
         }
+    }
+
+
+    @Override
+    public boolean isHit(int x, int y) {
+        return false;
     }
 }

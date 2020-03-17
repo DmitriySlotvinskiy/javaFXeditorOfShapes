@@ -71,6 +71,7 @@ public class Main extends Application {
     private void mouseClick(MouseEvent mouseEvent) {
         board.setX(mouseEvent.getX());
         board.setY(mouseEvent.getY());
+        board.isHit();
         drawFrame();
     }
 
