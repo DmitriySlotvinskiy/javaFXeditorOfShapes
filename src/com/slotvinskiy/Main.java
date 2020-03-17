@@ -111,10 +111,10 @@ public class Main extends Application {
                 board.switchCurrentMovingShapeToSquare();
                 break;
             case DIGIT3:
-                board.switchCurrentMovingShapeToArc1();
+                board.switchCurrentMovingShapeToArcUp();
                 break;
             case DIGIT4:
-                board.switchCurrentMovingShapeToArc2();
+                board.switchCurrentMovingShapeToArcDown();
                 break;
         }
         drawFrame();

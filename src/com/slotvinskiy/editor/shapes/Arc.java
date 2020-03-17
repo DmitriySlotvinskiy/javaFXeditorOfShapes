@@ -2,7 +2,7 @@ package com.slotvinskiy.editor.shapes;
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
 
-public class Arc extends BaseShape{
+public abstract class Arc extends BaseShape{
 
     private final int ARC_EXTENT = 180;
     private int startAngle;
@@ -26,10 +26,5 @@ public class Arc extends BaseShape{
         } else {
             displayDriver.drawArc1(x, y, size, size, startAngle, ARC_EXTENT);
         }
-    }
-
-    @Override
-    public boolean isHit(int x, int y) {
-        return false;
     }
 }

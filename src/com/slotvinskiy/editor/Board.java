@@ -1,9 +1,6 @@
 package com.slotvinskiy.editor;
 
-import com.slotvinskiy.editor.shapes.Arc;
-import com.slotvinskiy.editor.shapes.CircleShape;
-import com.slotvinskiy.editor.shapes.Shape;
-import com.slotvinskiy.editor.shapes.SquareShape;
+import com.slotvinskiy.editor.shapes.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,15 +108,16 @@ public class Board {
         movingShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
     }
 
-    public void switchCurrentMovingShapeToArc1() {
+    public void switchCurrentMovingShapeToArcUp() {
         turnMovingShapesIntoStatical();
-        movingShapes.add(new Arc(this, displayDriver, START_X, START_Y, 360, true));
+        movingShapes.add(new ArcUp(this, displayDriver, START_X, START_Y, true));
     }
 
-    public void switchCurrentMovingShapeToArc2() {
+    public void switchCurrentMovingShapeToArcDown() {
         turnMovingShapesIntoStatical();
-        movingShapes.add(new Arc(this, displayDriver, START_X, START_Y, 180, true));
+        movingShapes.add(new ArcDown(this, displayDriver, START_X, START_Y, true));
     }
+
 
     public void turnMovingShapesIntoStatical() {
         if (movingShapes.size() != 0) {

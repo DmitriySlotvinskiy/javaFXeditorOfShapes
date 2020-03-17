@@ -5,11 +5,11 @@ import com.slotvinskiy.editor.DisplayDriver;
 
 public class CircleShape extends BaseShape {
 
-    public CircleShape(Board board, DisplayDriver displayDriver, double x, double y) {
+    public CircleShape(Board board, DisplayDriver displayDriver, int x, int y) {
         super(board, displayDriver, x, y);
     }
 
-    public CircleShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
+    public CircleShape(Board board, DisplayDriver displayDriver, int x, int y, boolean selected) {
         super(board, displayDriver, x, y, selected);
     }
 
@@ -27,6 +27,13 @@ public class CircleShape extends BaseShape {
 
     @Override
     public boolean isHit(int x, int y) {
+        if (x >= this.x && x <= (this.x + size) && y >= this.y && y <= (this.y + size)) {
+            double xCenter = this.x + size / 2.0;
+            double yCenter = this.y + size / 2.0;
+            if (Math.hypot((Math.abs(xCenter - x)), (Math.abs(yCenter - y))) <= size / 2.0) {
+                return true;
+            }
+        }
         return false;
     }
 }
