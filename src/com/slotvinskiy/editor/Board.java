@@ -42,10 +42,10 @@ public class Board {
     }
 
     public void drawFrame() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : staticalShapes) {
             shape.draw();
         }
-        for (Shape shape : staticalShapes) {
+        for (Shape shape : movingShapes) {
             shape.draw();
         }
 
@@ -78,6 +78,18 @@ public class Board {
     public void moveWithMouse(double offSetX, double offSetY) {
         for (Shape shape : movingShapes) {
             shape.moveWithMouse(offSetX, offSetY);
+        }
+    }
+
+    public void decreaseSize() {
+        for (Shape shape : movingShapes) {
+            shape.decreaseSize();
+        }
+    }
+
+    public void increaseSize() {
+        for (Shape shape : movingShapes) {
+            shape.increaseSize();
         }
     }
 

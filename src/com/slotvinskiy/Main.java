@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -45,6 +46,16 @@ public class Main extends Application {
         scene.setOnMousePressed(this::mouseClick);
         scene.setOnMouseDragged(this::mouseDrag);
         scene.setOnMouseReleased(this::mouseRelease);
+        scene.setOnScroll(this::changeSize);
+        drawFrame();
+    }
+
+    private void changeSize(ScrollEvent scrollEvent) {
+        if (scrollEvent.getDeltaY() > 0) {
+            board.increaseSize();
+        } else {
+            board.decreaseSize();
+        }
         drawFrame();
     }
 

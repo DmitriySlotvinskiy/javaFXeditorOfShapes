@@ -58,6 +58,16 @@ public abstract class BaseShape implements Shape {
     }
 
     @Override
+    public void decreaseSize() {
+        size--;
+    }
+
+    @Override
+    public void increaseSize() {
+        size++;
+    }
+
+    @Override
     public double getX() {
         return x;
     }

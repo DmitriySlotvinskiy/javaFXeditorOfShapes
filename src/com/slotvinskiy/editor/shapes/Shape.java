@@ -10,6 +10,9 @@ public interface Shape {
     void moveLeft();
     void moveWithMouse(double offSetX, double offSetY);
 
+    void decreaseSize();
+    void increaseSize();
+
     double getX();
 
     double getY();
