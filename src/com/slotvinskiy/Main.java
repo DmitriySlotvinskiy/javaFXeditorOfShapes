@@ -71,7 +71,11 @@ public class Main extends Application {
     private void mouseClick(MouseEvent mouseEvent) {
         board.setX(mouseEvent.getX());
         board.setY(mouseEvent.getY());
-        board.isHit();
+        if (mouseEvent.isControlDown()) {
+            board.ifHitDeselectedTurnSelectedElseTurnDeselected();
+        } else {
+            board.ifHitTurnSelected();
+        }
         drawFrame();
     }
 
@@ -102,7 +106,7 @@ public class Main extends Application {
                 board.moveRight();
                 break;
             case ENTER:
-                board.turnMovingShapesIntoStatical();
+                board.turnAllMovingShapesIntoStatical();
                 break;
             case DIGIT1:
                 board.switchCurrentMovingShapeToCircle();

@@ -17,7 +17,7 @@ public class CircleShape extends BaseShape {
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            displayDriver.setLineWidthAsSelected();
+            setAsSelected();
             displayDriver.drawSelectedCircle(x, y, size);
         } else {
             displayDriver.drawCircle(x, y, size);

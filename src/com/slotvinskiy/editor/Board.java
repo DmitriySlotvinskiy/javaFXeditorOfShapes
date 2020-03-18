@@ -30,118 +30,139 @@ public class Board {
     }
 
     private final DisplayDriver displayDriver;
-    private final List<Shape> movingShapes = new ArrayList<>();
-    private final List<Shape> staticalShapes = new ArrayList<>();
+    private final List<Shape> selectedShapes = new ArrayList<>();
+    private final List<Shape> notSelectedShapes = new ArrayList<>();
 
     public Board(DisplayDriver displayDriver) {
         this.displayDriver = displayDriver;
-        movingShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
+        selectedShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void drawFrame() {
-        for (Shape shape : staticalShapes) {
+        for (Shape shape : notSelectedShapes) {
             shape.draw();
         }
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.draw();
         }
 
     }
 
     public void moveUp() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.moveUp();
         }
     }
 
     public void moveDown() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.moveDown();
         }
     }
 
     public void moveRight() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.moveRight();
         }
     }
 
     public void moveLeft() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.moveLeft();
         }
     }
 
     public void moveWithMouse(double offSetX, double offSetY) {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.moveWithMouse(offSetX, offSetY);
         }
     }
 
     public void decreaseSize() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.decreaseSize();
         }
     }
 
     public void increaseSize() {
-        for (Shape shape : movingShapes) {
+        for (Shape shape : selectedShapes) {
             shape.increaseSize();
         }
     }
 
-    public List<Shape> getMovingShapes() {
-        return movingShapes;
+    public List<Shape> getSelectedShapes() {
+        return selectedShapes;
     }
 
-    public List<Shape> getStaticalShapes() {
-        return staticalShapes;
+    public List<Shape> getNotSelectedShapes() {
+        return notSelectedShapes;
     }
 
     public void switchCurrentMovingShapeToCircle() {
-        turnMovingShapesIntoStatical();
-        movingShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
+        turnAllMovingShapesIntoStatical();
+        selectedShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void switchCurrentMovingShapeToSquare() {
-        turnMovingShapesIntoStatical();
-        movingShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
+        turnAllMovingShapesIntoStatical();
+        selectedShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void switchCurrentMovingShapeToArcUp() {
-        turnMovingShapesIntoStatical();
-        movingShapes.add(new ArcUp(this, displayDriver, START_X, START_Y, true));
+        turnAllMovingShapesIntoStatical();
+        selectedShapes.add(new ArcUp(this, displayDriver, START_X, START_Y, true));
     }
 
     public void switchCurrentMovingShapeToArcDown() {
-        turnMovingShapesIntoStatical();
-        movingShapes.add(new ArcDown(this, displayDriver, START_X, START_Y, true));
+        turnAllMovingShapesIntoStatical();
+        selectedShapes.add(new ArcDown(this, displayDriver, START_X, START_Y, true));
     }
 
 
-    public void turnMovingShapesIntoStatical() {
-        if (movingShapes.size() != 0) {
-            for (Shape shape : movingShapes) {
+    public void turnAllMovingShapesIntoStatical() {
+        if (selectedShapes.size() != 0) {
+            for (Shape shape : selectedShapes) {
                 shape.setSelection(false);
             }
-            staticalShapes.addAll(movingShapes);
-            movingShapes.clear();
+            notSelectedShapes.addAll(selectedShapes);
+            selectedShapes.clear();
         }
     }
 
-    public void isHit() {
-        for (Shape shape : staticalShapes) {
+    public void ifHitTurnSelected() {
+        for (Shape shape : notSelectedShapes) {
             if (shape.isHit(x, y)) {
-                turnMovingShapesIntoStatical();
-                addToMoving(shape);
+                turnAllMovingShapesIntoStatical();
+                addToSelectedShapes(shape);
                 break;
             }
         }
     }
 
-    private void addToMoving(Shape shape) {
-        staticalShapes.remove(shape);
-        movingShapes.add(shape);
+    private void addToSelectedShapes(Shape shape) {
+        notSelectedShapes.remove(shape);
+        selectedShapes.add(shape);
         shape.setAsSelected();
+    }
+
+    public void ifHitDeselectedTurnSelectedElseTurnDeselected() {
+        for (Shape shape : notSelectedShapes) {
+            if (shape.isHit(x, y)) {
+                addToSelectedShapes(shape);
+                return;
+            }
+        }
+        for (Shape shape : selectedShapes) {
+            if (shape.isHit(x, y)) {
+                addToDeselectedShapes(shape);
+                break;
+            }
+        }
+    }
+
+    private void addToDeselectedShapes(Shape shape) {
+        selectedShapes.remove(shape);
+        notSelectedShapes.add(shape);
+        shape.setAsDeselected();
     }
 }
