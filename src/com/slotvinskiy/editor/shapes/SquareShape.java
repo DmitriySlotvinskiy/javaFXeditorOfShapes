@@ -5,8 +5,11 @@ import com.slotvinskiy.editor.DisplayDriver;
 
 public class SquareShape extends BaseShape {
 
-    public SquareShape(Board board, DisplayDriver displayDriver, double x, double y) {
-        super(board, displayDriver, x, y);
+
+    public SquareShape(SquareShape source) {
+        super(source.board, source.displayDriver, source.x, source.y);
+        size = source.size;
+        color = source.color;
     }
 
     public SquareShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {

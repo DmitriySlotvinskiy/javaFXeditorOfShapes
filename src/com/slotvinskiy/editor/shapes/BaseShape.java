@@ -27,7 +27,7 @@ public abstract class BaseShape implements Shape {
     }
 
     public BaseShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
-        this(board, displayDriver,  x,  y);
+        this(board, displayDriver, x, y);
         this.selected = selected;
     }
 

@@ -5,8 +5,11 @@ import com.slotvinskiy.editor.DisplayDriver;
 
 public class CircleShape extends BaseShape {
 
-    public CircleShape(Board board, DisplayDriver displayDriver, int x, int y) {
-        super(board, displayDriver, x, y);
+    public CircleShape(CircleShape source) {
+        super(source.board, source.displayDriver, source.x, source.y);
+
+        size = source.size;
+        color = source.color;
     }
 
     public CircleShape(Board board, DisplayDriver displayDriver, int x, int y, boolean selected) {

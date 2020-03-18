@@ -41,7 +41,6 @@ public class DisplayDriverImpl implements DisplayDriver {
     @Override
     public void drawSelectedCircle(double x, double y, double diameter) {
         gc.strokeOval(x, y, diameter, diameter);
-
     }
 
     @Override
@@ -57,7 +56,6 @@ public class DisplayDriverImpl implements DisplayDriver {
     @Override
     public void drawArc1(double x, double y, double w, double h, double startAngle, double arcExtent) {
         gc.fillArc(x, y, w, h, startAngle, arcExtent, ArcType.ROUND);
-
     }
 
     @Override

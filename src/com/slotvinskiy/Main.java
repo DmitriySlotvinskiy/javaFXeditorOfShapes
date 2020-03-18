@@ -72,7 +72,7 @@ public class Main extends Application {
         board.setX(mouseEvent.getX());
         board.setY(mouseEvent.getY());
         if (mouseEvent.isControlDown()) {
-            board.ifHitDeselectedTurnSelectedElseTurnDeselected();
+            board.ifHitDeselectedTurnIntoSelectedElseTurnIntoNotSelected();
         } else {
             board.ifHitTurnSelected();
         }
@@ -92,7 +92,6 @@ public class Main extends Application {
 
     private void handleKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
-
             case UP:
                 board.moveUp();
                 break;
@@ -106,27 +105,32 @@ public class Main extends Application {
                 board.moveRight();
                 break;
             case ENTER:
-                board.turnAllMovingShapesIntoStatical();
+            case ESCAPE:
+                board.turnAllSelectedShapesIntoDeselected();
                 break;
             case DIGIT1:
-                board.switchCurrentMovingShapeToCircle();
+                board.switchCurrentSelectedShapeToCircle();
                 break;
             case DIGIT2:
-                board.switchCurrentMovingShapeToSquare();
+                board.switchCurrentSelectedShapeToSquare();
                 break;
             case DIGIT3:
-                board.switchCurrentMovingShapeToArcUp();
+                board.switchCurrentSelectedShapeToArcUp();
                 break;
             case DIGIT4:
-                board.switchCurrentMovingShapeToArcDown();
+                board.switchCurrentSelectedShapeToArcDown();
                 break;
             case DELETE:
                 board.deleteSelected();
                 break;
+            case C:
+                if (event.isControlDown()) {
+                    board.cloneSelected();
+                }
+                break;
         }
         drawFrame();
     }
-
 
     public void drawFrame() {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());

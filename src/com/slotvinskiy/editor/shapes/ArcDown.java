@@ -11,6 +11,12 @@ public class ArcDown extends Arc {
         super(board, displayDriver, x, y, START_ANGLE, selected);
     }
 
+    public ArcDown(ArcDown source) {
+        super(source.board, source.displayDriver, source.x, source.y, START_ANGLE, source.selected);
+        size = source.size;
+        color = source.color;
+    }
+
     @Override
     public boolean isHit(int x, int y) {
         if (x >= this.x && x <= (this.x + size) && y >= this.y + size / 2.0 && y <= (this.y + size)) {

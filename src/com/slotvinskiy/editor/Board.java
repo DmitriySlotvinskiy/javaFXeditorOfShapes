@@ -45,7 +45,6 @@ public class Board {
         for (Shape shape : selectedShapes) {
             shape.draw();
         }
-
     }
 
     public void moveUp() {
@@ -98,28 +97,27 @@ public class Board {
         return notSelectedShapes;
     }
 
-    public void switchCurrentMovingShapeToCircle() {
-        turnAllMovingShapesIntoStatical();
+    public void switchCurrentSelectedShapeToCircle() {
+        turnAllSelectedShapesIntoDeselected();
         selectedShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
-    public void switchCurrentMovingShapeToSquare() {
-        turnAllMovingShapesIntoStatical();
+    public void switchCurrentSelectedShapeToSquare() {
+        turnAllSelectedShapesIntoDeselected();
         selectedShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
     }
 
-    public void switchCurrentMovingShapeToArcUp() {
-        turnAllMovingShapesIntoStatical();
+    public void switchCurrentSelectedShapeToArcUp() {
+        turnAllSelectedShapesIntoDeselected();
         selectedShapes.add(new ArcUp(this, displayDriver, START_X, START_Y, true));
     }
 
-    public void switchCurrentMovingShapeToArcDown() {
-        turnAllMovingShapesIntoStatical();
+    public void switchCurrentSelectedShapeToArcDown() {
+        turnAllSelectedShapesIntoDeselected();
         selectedShapes.add(new ArcDown(this, displayDriver, START_X, START_Y, true));
     }
 
-
-    public void turnAllMovingShapesIntoStatical() {
+    public void turnAllSelectedShapesIntoDeselected() {
         if (selectedShapes.size() != 0) {
             for (Shape shape : selectedShapes) {
                 shape.setSelection(false);
@@ -130,37 +128,55 @@ public class Board {
     }
 
     public void ifHitTurnSelected() {
+        for (Shape shape : selectedShapes) {
+            if (shape.isHit(x, y)) {
+                return;
+            }
+        }
         for (Shape shape : notSelectedShapes) {
             if (shape.isHit(x, y)) {
-                turnAllMovingShapesIntoStatical();
-                addToSelectedShapes(shape);
+                turnAllSelectedShapesIntoDeselected();
+                turnShapeIntoSelected(shape);
                 break;
             }
         }
     }
 
-    private void addToSelectedShapes(Shape shape) {
+    private void turnShapeIntoSelected(Shape shape) {
         notSelectedShapes.remove(shape);
         selectedShapes.add(shape);
         shape.setAsSelected();
     }
 
-    public void ifHitDeselectedTurnSelectedElseTurnDeselected() {
+    public void ifHitDeselectedTurnIntoSelectedElseTurnIntoNotSelected() {
         for (Shape shape : notSelectedShapes) {
             if (shape.isHit(x, y)) {
-                addToSelectedShapes(shape);
+                turnShapeIntoSelected(shape);
                 return;
             }
         }
         for (Shape shape : selectedShapes) {
             if (shape.isHit(x, y)) {
-                addToDeselectedShapes(shape);
+                addToNotSelectedShapes(shape);
                 break;
             }
         }
     }
 
-    private void addToDeselectedShapes(Shape shape) {
+    private void addAllToSelectedShapes(List<Shape> shapes) {
+        for (Shape shape : shapes) {
+            addToSelectedShapes(shape);
+
+        }
+    }
+
+    private void addToSelectedShapes(Shape shape) {
+        selectedShapes.add(shape);
+        shape.setAsSelected();
+    }
+
+
+    private void addToNotSelectedShapes(Shape shape) {
         selectedShapes.remove(shape);
         notSelectedShapes.add(shape);
         shape.setAsDeselected();
@@ -168,5 +184,26 @@ public class Board {
 
     public void deleteSelected() {
         selectedShapes.clear();
+    }
+
+    public void cloneSelected() {
+        List<Shape> temp = new ArrayList<>();
+        for (Shape shape : selectedShapes) {
+            if (shape instanceof CircleShape) {
+                temp.add(new CircleShape((CircleShape) shape));
+            }
+            if (shape instanceof SquareShape) {
+                temp.add(new SquareShape((SquareShape) shape));
+            }
+            if (shape instanceof ArcUp) {
+                temp.add(new ArcUp((ArcUp) shape));
+            }
+            if (shape instanceof ArcDown) {
+                temp.add(new ArcDown((ArcDown) shape));
+            }
+        }
+        turnAllSelectedShapesIntoDeselected();
+        addAllToSelectedShapes(temp);
+
     }
 }
