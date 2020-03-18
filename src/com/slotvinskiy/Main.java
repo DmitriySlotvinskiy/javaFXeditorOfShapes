@@ -120,6 +120,9 @@ public class Main extends Application {
             case DIGIT4:
                 board.switchCurrentMovingShapeToArcDown();
                 break;
+            case DELETE:
+                board.deleteSelected();
+                break;
         }
         drawFrame();
     }

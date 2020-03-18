@@ -165,4 +165,8 @@ public class Board {
         notSelectedShapes.add(shape);
         shape.setAsDeselected();
     }
+
+    public void deleteSelected() {
+        selectedShapes.clear();
+    }
 }
