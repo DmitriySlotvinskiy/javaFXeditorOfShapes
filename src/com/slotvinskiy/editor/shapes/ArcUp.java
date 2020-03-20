@@ -3,12 +3,13 @@ package com.slotvinskiy.editor.shapes;
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
 
-public class ArcUp extends Arc{
+public class ArcUp extends Arc {
 
     private static final int START_ANGLE = 360;
 
     public ArcUp(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
         super(board, displayDriver, x, y, START_ANGLE, selected);
+        setAsSelected();
     }
 
     public ArcUp(ArcUp source) {
@@ -27,5 +28,9 @@ public class ArcUp extends Arc{
             }
         }
         return false;
+    }
+
+    public String getType() {
+        return "ArcUp";
     }
 }

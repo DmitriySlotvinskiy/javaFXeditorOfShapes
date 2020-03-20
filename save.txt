@@ -1,0 +1,1 @@
+[{"x":209.0,"y":306.0,"size":50,"shapeType":"Circle"},{"x":224.0,"y":201.0,"size":50,"shapeType":"Square"},{"x":433.0,"y":188.0,"size":50,"shapeType":"ArcUp"}]

@@ -9,6 +9,7 @@ public class ArcDown extends Arc {
 
     public ArcDown(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
         super(board, displayDriver, x, y, START_ANGLE, selected);
+        setAsSelected();
     }
 
     public ArcDown(ArcDown source) {
@@ -27,5 +28,9 @@ public class ArcDown extends Arc {
             }
         }
         return false;
+    }
+
+    public String getType() {
+        return "ArcDown";
     }
 }

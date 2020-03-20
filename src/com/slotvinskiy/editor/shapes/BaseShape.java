@@ -90,6 +90,9 @@ public abstract class BaseShape implements Shape {
     public void setAsDeselected() {
         displayDriver.setLineWidthAsDeselected();
         setSelection(false);
+    }
 
+    public int getSize() {
+        return size;
     }
 }

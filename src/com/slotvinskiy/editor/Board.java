@@ -1,6 +1,7 @@
 package com.slotvinskiy.editor;
 
 import com.slotvinskiy.editor.shapes.*;
+import com.slotvinskiy.save.Saver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,11 @@ public class Board {
     }
 
     private final DisplayDriver displayDriver;
-    private final List<Shape> selectedShapes = new ArrayList<>();
-    private final List<Shape> notSelectedShapes = new ArrayList<>();
+    private List<Shape> selectedShapes = new ArrayList<>();
+    private List<Shape> notSelectedShapes = new ArrayList<>();
 
     public Board(DisplayDriver displayDriver) {
         this.displayDriver = displayDriver;
-        selectedShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
     }
 
     public void drawFrame() {
@@ -205,5 +205,16 @@ public class Board {
         turnAllSelectedShapesIntoDeselected();
         addAllToSelectedShapes(temp);
 
+    }
+
+    public void save() {
+        turnAllSelectedShapesIntoDeselected();
+        Saver.save(notSelectedShapes);
+    }
+
+    public void load() {
+        selectedShapes.clear();
+        notSelectedShapes.clear();
+        notSelectedShapes = Saver.load(displayDriver, this);
     }
 }

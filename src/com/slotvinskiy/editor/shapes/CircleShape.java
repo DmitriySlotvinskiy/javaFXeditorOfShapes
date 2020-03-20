@@ -1,5 +1,6 @@
 package com.slotvinskiy.editor.shapes;
 
+import com.google.gson.Gson;
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
 
@@ -12,15 +13,25 @@ public class CircleShape extends BaseShape {
         color = source.color;
     }
 
-    public CircleShape(Board board, DisplayDriver displayDriver, int x, int y, boolean selected) {
+    public CircleShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
         super(board, displayDriver, x, y, selected);
+        if (selected) {
+            setAsSelected();
+        }
+    }
+
+    public CircleShape(Board board, DisplayDriver displayDriver, double x, double y, int size, boolean selected) {
+        super(board, displayDriver, x, y, selected);
+        this.size = size;
+        if (selected) {
+            setAsSelected();
+        }
     }
 
     @Override
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            setAsSelected();
             displayDriver.drawSelectedCircle(x, y, size);
         } else {
             displayDriver.drawCircle(x, y, size);
@@ -38,5 +49,9 @@ public class CircleShape extends BaseShape {
             }
         }
         return false;
+    }
+
+    public String getType() {
+        return "Circle";
     }
 }

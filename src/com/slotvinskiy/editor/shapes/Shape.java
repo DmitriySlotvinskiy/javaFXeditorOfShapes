@@ -16,4 +16,6 @@ public interface Shape {
     void setAsDeselected();
     double getX();
     double getY();
+    int getSize();
+    String getType();
 }

@@ -14,13 +14,21 @@ public class SquareShape extends BaseShape {
 
     public SquareShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
         super(board, displayDriver, x, y, selected);
+        setAsSelected();
+    }
+
+    public SquareShape(Board board, DisplayDriver displayDriver, double x, double y, int size, boolean selected) {
+        super(board, displayDriver, x, y, selected);
+        this.size = size;
+        if (selected) {
+            setAsSelected();
+        }
     }
 
     @Override
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            setAsSelected();
             displayDriver.drawSelectedSquare(x, y, size);
         } else {
             displayDriver.drawSquare(x, y, size);
@@ -35,5 +43,9 @@ public class SquareShape extends BaseShape {
         } else {
             return false;
         }
+    }
+
+    public String getType() {
+        return "Square";
     }
 }

@@ -17,7 +17,6 @@ public abstract class Arc extends BaseShape {
     public void draw() {
         displayDriver.setColor(color.toHex());
         if (selected) {
-            setAsSelected();
             displayDriver.drawSelectedArc1(x, y, size, size, startAngle, ARC_EXTENT);
         } else {
             displayDriver.drawArc1(x, y, size, size, startAngle, ARC_EXTENT);
