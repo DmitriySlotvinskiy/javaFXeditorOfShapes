@@ -18,6 +18,12 @@ public class ArcUp extends Arc {
         color = source.color;
     }
 
+    public ArcUp(Board board, DisplayDriver displayDriver, double x, double y, int size, boolean selected) {
+        super(board, displayDriver, x, y, START_ANGLE, selected);
+        this.size = size;
+        setAsDeselected();
+    }
+
     @Override
     public boolean isHit(int x, int y) {
         if (x >= this.x && x <= (this.x + size) && y >= this.y && y <= (this.y + size / 2.0)) {

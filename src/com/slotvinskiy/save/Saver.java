@@ -3,6 +3,7 @@ package com.slotvinskiy.save;
 import com.google.gson.Gson;
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
+import com.slotvinskiy.editor.shapes.ArcUp;
 import com.slotvinskiy.editor.shapes.CircleShape;
 import com.slotvinskiy.editor.shapes.Shape;
 import com.slotvinskiy.editor.shapes.SquareShape;
@@ -19,14 +20,13 @@ public class Saver {
             return;
         }
         Gson gson = new Gson();
-//        List<FileShape> fileShapeList = new ArrayList<>();
         FileShapesList fileShapeList = new FileShapesList();
         FileShape fs;
         for (Shape shape : shapes) {
             fs = new FileShape(shape);
             fileShapeList.add(fs);
         }
-        String saveData = gson.toJson(fileShapeList.getShapeList());
+        String saveData = gson.toJson(fileShapeList);
         System.out.println(saveData);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
@@ -46,7 +46,6 @@ public class Saver {
         }
         Gson gson = new Gson();
         FileShapesList fsList = gson.fromJson(jsonString, FileShapesList.class);
-        System.out.println(fsList.getShapeList());
         List<Shape> loadList = new ArrayList<>();
         for (FileShape fs : fsList.getShapeList()) {
             if (fs.getShapeType().equals("Circle")) {
@@ -54,6 +53,12 @@ public class Saver {
             }
             if (fs.getShapeType().equals("Square")) {
                 loadList.add(new SquareShape(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            }
+            if (fs.getShapeType().equals("ArcUp")) {
+                loadList.add(new ArcUp(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            }
+            if (fs.getShapeType().equals("ArcDown")) {
+                loadList.add(new ArcUp(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
             }
         }
 
