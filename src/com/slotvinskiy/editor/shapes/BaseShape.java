@@ -4,8 +4,6 @@ import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
 import com.slotvinskiy.editor.MyColor;
 
-import java.util.Random;
-
 public abstract class BaseShape implements Shape {
 
     public final int DEFAULT_SIZE = 50;

@@ -18,8 +18,6 @@ public class Main extends Application {
 
     private static final int BOARD_WIDTH = 800;
     private static final int BOARD_HEIGHT = 600;
-    private static final int FPS = 60;
-
     private boolean closed;
     private GraphicsContext gc;
 
@@ -87,6 +85,8 @@ public class Main extends Application {
             case C:
                 if (event.isControlDown()) {
                     board.cloneSelected();
+                } else {
+                    board.changeCurrentColor();
                 }
                 break;
             case F5:
@@ -119,9 +119,6 @@ public class Main extends Application {
     }
 
     private void mouseLeftClick(MouseEvent mouseEvent) {
-        if (mouseEvent.isSecondaryButtonDown()) {
-            board.changeCurrentColor();
-        } else {
             board.setX(mouseEvent.getX());
             board.setY(mouseEvent.getY());
             if (mouseEvent.isControlDown()) {
@@ -129,7 +126,6 @@ public class Main extends Application {
             } else {
                 board.ifHitTurnSelected();
             }
-        }
         drawFrame();
     }
 
@@ -155,6 +151,6 @@ public class Main extends Application {
                 "    ESC - deselect;    ENTER - apply shape(shapes);", 10, 15);
         gc.fillText("LEFT CLICK - select aim and deselect another shapes;   LEFT CLICK + CTRL - add to selected;" +
                 "    CTRL + C - copy selected;   DEL - delete selected", 10, 35);
-        gc.fillText("SCROLLING - change size;    F5 - save scene;   F6 - load scene;", 10, 55);
+        gc.fillText("SCROLLING - change size;    C - change color;    F5 - save scene;   F6 - load scene;", 10, 55);
     }
 }

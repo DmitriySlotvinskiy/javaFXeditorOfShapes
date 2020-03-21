@@ -1,4 +1,5 @@
 package com.slotvinskiy.editor.shapes;
+
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
 import com.slotvinskiy.editor.MyColor;

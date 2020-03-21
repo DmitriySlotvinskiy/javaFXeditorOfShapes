@@ -9,7 +9,7 @@ public class FileShape {
     private String shapeType;
     private int colorCode;
 
-    public FileShape (Shape shape) {
+    public FileShape(Shape shape) {
         this.x = shape.getX();
         this.y = shape.getY();
         this.size = shape.getSize();
