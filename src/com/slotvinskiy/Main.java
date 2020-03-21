@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -43,7 +44,7 @@ public class Main extends Application {
         board = new Board(displayDriver);
 
         scene.setOnKeyPressed(this::handleKeyPressed);
-        scene.setOnMousePressed(this::mouseClick);
+        scene.setOnMousePressed(this::mouseLeftClick);
         scene.setOnMouseDragged(this::mouseDrag);
         scene.setOnMouseReleased(this::mouseRelease);
         scene.setOnScroll(this::changeSize);
@@ -99,6 +100,7 @@ public class Main extends Application {
     }
 
     private void changeSize(ScrollEvent scrollEvent) {
+
         if (scrollEvent.getDeltaY() > 0) {
             board.increaseSize();
         } else {
@@ -116,13 +118,17 @@ public class Main extends Application {
         board.setY(mouseEvent.getY());
     }
 
-    private void mouseClick(MouseEvent mouseEvent) {
-        board.setX(mouseEvent.getX());
-        board.setY(mouseEvent.getY());
-        if (mouseEvent.isControlDown()) {
-            board.ifHitDeselectedTurnIntoSelectedElseTurnIntoNotSelected();
+    private void mouseLeftClick(MouseEvent mouseEvent) {
+        if (mouseEvent.isSecondaryButtonDown()) {
+            board.changeCurrentColor();
         } else {
-            board.ifHitTurnSelected();
+            board.setX(mouseEvent.getX());
+            board.setY(mouseEvent.getY());
+            if (mouseEvent.isControlDown()) {
+                board.ifHitDeselectedTurnIntoSelectedElseTurnIntoNotSelected();
+            } else {
+                board.ifHitTurnSelected();
+            }
         }
         drawFrame();
     }
@@ -132,7 +138,6 @@ public class Main extends Application {
         board.setY(0);
     }
 
-
     @Override
     public void stop() {
         closed = true;
@@ -140,6 +145,16 @@ public class Main extends Application {
 
     public void drawFrame() {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        showManual();
         board.drawFrame();
+    }
+
+    public void showManual() {
+        gc.setFill(Color.BLUE);
+        gc.fillText("1-4 - add shape (and apply previous one);    MOUSE and KEYBOARD ARROWS - moving shape;" +
+                "    ESC - deselect;    ENTER - apply shape(shapes);", 10, 15);
+        gc.fillText("LEFT CLICK - select aim and deselect another shapes;   LEFT CLICK + CTRL - add to selected;" +
+                "    CTRL + C - copy selected;   DEL - delete selected", 10, 35);
+        gc.fillText("SCROLLING - change size;    F5 - save scene;   F6 - load scene;", 10, 55);
     }
 }

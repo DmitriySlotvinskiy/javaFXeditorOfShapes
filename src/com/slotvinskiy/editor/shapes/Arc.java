@@ -2,6 +2,7 @@ package com.slotvinskiy.editor.shapes;
 
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
+import com.slotvinskiy.editor.MyColor;
 
 public abstract class Arc extends BaseShape {
 
@@ -15,6 +16,7 @@ public abstract class Arc extends BaseShape {
 
     @Override
     public void draw() {
+        color = MyColor.values()[colorCode];
         displayDriver.setColor(color.toHex());
         if (selected) {
             displayDriver.drawSelectedArc1(x, y, size, size, startAngle, ARC_EXTENT);

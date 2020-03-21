@@ -18,4 +18,6 @@ public interface Shape {
     double getY();
     int getSize();
     String getType();
+    void changeColor(int currentColorCode);
+    int getColorCode();
 }

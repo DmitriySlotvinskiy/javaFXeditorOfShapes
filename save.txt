@@ -1,1 +1,1 @@
-{"shapeList":[{"x":170.0,"y":210.0,"size":50,"shapeType":"Circle"},{"x":223.0,"y":366.0,"size":50,"shapeType":"Square"},{"x":454.0,"y":146.0,"size":50,"shapeType":"ArcUp"},{"x":555.0,"y":380.0,"size":50,"shapeType":"ArcDown"}]}
+{"shapeList":[{"x":155.0,"y":243.0,"size":50,"shapeType":"Circle","colorCode":1},{"x":219.0,"y":386.0,"size":50,"shapeType":"Square","colorCode":3},{"x":392.0,"y":120.0,"size":50,"shapeType":"ArcUp","colorCode":4},{"x":293.0,"y":300.0,"size":50,"shapeType":"Square","colorCode":6},{"x":363.0,"y":198.0,"size":50,"shapeType":"ArcDown","colorCode":0}]}

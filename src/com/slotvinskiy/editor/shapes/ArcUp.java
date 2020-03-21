@@ -6,6 +6,7 @@ import com.slotvinskiy.editor.DisplayDriver;
 public class ArcUp extends Arc {
 
     private static final int START_ANGLE = 360;
+    public static final String SHAPE_TYPE = "ArcUp";
 
     public ArcUp(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
         super(board, displayDriver, x, y, START_ANGLE, selected);
@@ -16,12 +17,14 @@ public class ArcUp extends Arc {
         super(source.board, source.displayDriver, source.x, source.y, START_ANGLE, source.selected);
         size = source.size;
         color = source.color;
+        colorCode = source.colorCode;
     }
 
-    public ArcUp(Board board, DisplayDriver displayDriver, double x, double y, int size, boolean selected) {
+    public ArcUp(Board board, DisplayDriver displayDriver, double x, double y, int size, boolean selected, int colorCode) {
         super(board, displayDriver, x, y, START_ANGLE, selected);
         this.size = size;
         setAsDeselected();
+        this.colorCode = colorCode;
     }
 
     @Override
@@ -37,6 +40,6 @@ public class ArcUp extends Arc {
     }
 
     public String getType() {
-        return "ArcUp";
+        return SHAPE_TYPE;
     }
 }

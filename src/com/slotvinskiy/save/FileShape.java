@@ -7,12 +7,14 @@ public class FileShape {
     private double y;
     private int size;
     private String shapeType;
+    private int colorCode;
 
     public FileShape (Shape shape) {
         this.x = shape.getX();
         this.y = shape.getY();
         this.size = shape.getSize();
         this.shapeType = shape.getType();
+        this.colorCode = shape.getColorCode();
     }
 
     public double getX() {
@@ -29,5 +31,9 @@ public class FileShape {
 
     public String getShapeType() {
         return shapeType;
+    }
+
+    public int getColorCode() {
+        return colorCode;
     }
 }

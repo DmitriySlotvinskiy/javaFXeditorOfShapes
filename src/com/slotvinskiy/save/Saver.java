@@ -3,10 +3,7 @@ package com.slotvinskiy.save;
 import com.google.gson.Gson;
 import com.slotvinskiy.editor.Board;
 import com.slotvinskiy.editor.DisplayDriver;
-import com.slotvinskiy.editor.shapes.ArcUp;
-import com.slotvinskiy.editor.shapes.CircleShape;
-import com.slotvinskiy.editor.shapes.Shape;
-import com.slotvinskiy.editor.shapes.SquareShape;
+import com.slotvinskiy.editor.shapes.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,8 +24,7 @@ public class Saver {
             fileShapeList.add(fs);
         }
         String saveData = gson.toJson(fileShapeList);
-        System.out.println(saveData);
-
+        System.out.println(saveData); //for debug
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
             writer.write(saveData);
         } catch (IOException e) {
@@ -48,17 +44,17 @@ public class Saver {
         FileShapesList fsList = gson.fromJson(jsonString, FileShapesList.class);
         List<Shape> loadList = new ArrayList<>();
         for (FileShape fs : fsList.getShapeList()) {
-            if (fs.getShapeType().equals("Circle")) {
-                loadList.add(new CircleShape(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            if (fs.getShapeType().equals(CircleShape.SHAPE_TYPE)) {
+                loadList.add(new CircleShape(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false, fs.getColorCode()));
             }
-            if (fs.getShapeType().equals("Square")) {
-                loadList.add(new SquareShape(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            if (fs.getShapeType().equals(SquareShape.SHAPE_TYPE)) {
+                loadList.add(new SquareShape(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false, fs.getColorCode()));
             }
-            if (fs.getShapeType().equals("ArcUp")) {
-                loadList.add(new ArcUp(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            if (fs.getShapeType().equals(ArcUp.SHAPE_TYPE)) {
+                loadList.add(new ArcUp(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false, fs.getColorCode()));
             }
-            if (fs.getShapeType().equals("ArcDown")) {
-                loadList.add(new ArcUp(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false));
+            if (fs.getShapeType().equals(ArcDown.SHAPE_TYPE)) {
+                loadList.add(new ArcDown(board, displayDriver, fs.getX(), fs.getY(), fs.getSize(), false, fs.getColorCode()));
             }
         }
 

@@ -8,12 +8,14 @@ import java.util.Random;
 
 public abstract class BaseShape implements Shape {
 
+    public final int DEFAULT_SIZE = 50;
     protected double x;
     protected double y;
-    protected int size = 50;
+    protected int size = DEFAULT_SIZE;
     protected Board board;
     protected DisplayDriver displayDriver;
     protected MyColor color;
+    protected int colorCode;
     protected boolean selected = false;
 
     public BaseShape(Board board, DisplayDriver displayDriver, double x, double y) {
@@ -21,9 +23,7 @@ public abstract class BaseShape implements Shape {
         this.displayDriver = displayDriver;
         this.x = x;
         this.y = y;
-        Random random = new Random();
-        int colorsNum = MyColor.values().length;
-        color = MyColor.values()[random.nextInt(colorsNum)];
+        color = MyColor.values()[colorCode];
     }
 
     public BaseShape(Board board, DisplayDriver displayDriver, double x, double y, boolean selected) {
@@ -94,5 +94,13 @@ public abstract class BaseShape implements Shape {
 
     public int getSize() {
         return size;
+    }
+
+    public int getColorCode() {
+        return colorCode;
+    }
+
+    public void changeColor(int currentColorCode) {
+        this.colorCode = currentColorCode;
     }
 }

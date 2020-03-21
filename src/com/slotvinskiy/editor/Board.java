@@ -8,10 +8,12 @@ import java.util.List;
 
 public class Board {
 
-    private final int START_X = 400;
-    private final int START_Y = 300;
+    public static final int COLORS_CODES_NUMBER = 7;
+    private final int DEFAULT_X = 400;
+    private final int DEFAULT_Y = 300;
     private int x;
     private int y;
+    private int currentColorCode = 0;
 
 
     public double getX() {
@@ -39,6 +41,7 @@ public class Board {
     }
 
     public void drawFrame() {
+
         for (Shape shape : notSelectedShapes) {
             shape.draw();
         }
@@ -89,32 +92,24 @@ public class Board {
         }
     }
 
-    public List<Shape> getSelectedShapes() {
-        return selectedShapes;
-    }
-
-    public List<Shape> getNotSelectedShapes() {
-        return notSelectedShapes;
-    }
-
     public void switchCurrentSelectedShapeToCircle() {
         turnAllSelectedShapesIntoDeselected();
-        selectedShapes.add(new CircleShape(this, displayDriver, START_X, START_Y, true));
+        selectedShapes.add(new CircleShape(this, displayDriver, DEFAULT_X, DEFAULT_Y, true));
     }
 
     public void switchCurrentSelectedShapeToSquare() {
         turnAllSelectedShapesIntoDeselected();
-        selectedShapes.add(new SquareShape(this, displayDriver, START_X, START_Y, true));
+        selectedShapes.add(new SquareShape(this, displayDriver, DEFAULT_X, DEFAULT_Y, true));
     }
 
     public void switchCurrentSelectedShapeToArcUp() {
         turnAllSelectedShapesIntoDeselected();
-        selectedShapes.add(new ArcUp(this, displayDriver, START_X, START_Y, true));
+        selectedShapes.add(new ArcUp(this, displayDriver, DEFAULT_X, DEFAULT_Y, true));
     }
 
     public void switchCurrentSelectedShapeToArcDown() {
         turnAllSelectedShapesIntoDeselected();
-        selectedShapes.add(new ArcDown(this, displayDriver, START_X, START_Y, true));
+        selectedShapes.add(new ArcDown(this, displayDriver, DEFAULT_X, DEFAULT_Y, true));
     }
 
     public void turnAllSelectedShapesIntoDeselected() {
@@ -216,5 +211,17 @@ public class Board {
         selectedShapes.clear();
         notSelectedShapes.clear();
         notSelectedShapes = Saver.load(displayDriver, this);
+    }
+
+    public void changeCurrentColor() {
+        if (currentColorCode < COLORS_CODES_NUMBER) {
+            currentColorCode++;
+        } else {
+            currentColorCode = 0;
+        }
+        for (Shape shape : selectedShapes) {
+            shape.changeColor(currentColorCode);
+        }
+        drawFrame();
     }
 }
